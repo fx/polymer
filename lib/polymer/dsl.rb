@@ -259,7 +259,7 @@ module Polymer
     # @private
     #
     class ProjectConfig
-      ATTRIBUTES = %w( cache css padding url sass ).map(&:to_sym).freeze
+      ATTRIBUTES = %w( cache css padding url sass sass_classes ).map(&:to_sym).freeze
 
       # Define the setter methods for each attribute. The setters are
       # sans-equals to provide a slightly more concise syntax.

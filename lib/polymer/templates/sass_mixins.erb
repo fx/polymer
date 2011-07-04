@@ -37,3 +37,35 @@
     background-position: $x-offset $y-offset
 <% end %>
 <% end %>
+
+<% if project.sass_classes %>
+<% project.sprites.each_with_index do |sprite, sprite_index| %>
+
+<% if sprite.sources.any? %>
+<% sprite.sources.each_with_index do |source, source_index| %>
+.sprite-<%= sprite.name %>-<%= source.name %><% unless source == sprite.sources.last %>,<% end %>
+<% end %>
+  background-image: url(<%= sprite.url %>)
+  <% if sprite.sizes.any? %>width: <%= sprite.sizes.first[0] %>px
+  height: <%= sprite.sizes.first[1] %>px<% end %>
+<% end %>
+<% end %>
+
+<% end %>
+
+<% if project.sass_classes %>
+.sprite
+  display: block
+<% project.sprites.each_with_index do |sprite, sprite_index| %>
+  &-<%= sprite.name %>
+    background-image: url(<%= sprite.url %>)
+    <% if sprite.sizes.any? %>width: <%= sprite.sizes.first[0] %>px
+    height: <%= sprite.sizes.first[1] %>px<% end %>
+<% sprite.sources.each_with_index do |source, source_index| %>
+    &-<%= source.name %>
+      <% if !sprite.uniform? && source.size != sprite.sizes.first %>width: <%= source.image.width %>px
+      height: <%= source.image.height %>px<% end %>
+      background-position: 0px <%= sprite.position_of(source) %>px
+<% end %>
+<% end %>
+<% end %>

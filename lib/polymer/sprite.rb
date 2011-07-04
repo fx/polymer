@@ -138,5 +138,26 @@ module Polymer
       true
     end
 
+    # Returns unique dimensions of all sources, ordered by number of occurances
+    # (first size is the most common)
+    #
+    # If there are no sources, an empty array is returned.
+    #
+    # @return [Array]
+    def sizes
+      sizes = sources.collect { |s| [s.image.width, s.image.height] }
+      size_counts = Hash.new
+      sizes.each { |s| size_counts.store(s, size_counts[s].to_i+1) }
+      
+      size_counts.sort_by{|k,v| v}.reverse.collect(&:first).uniq
+    end
+    
+    # Returns true if all sources are of the same size
+    #
+    # @return [Boolean]
+    def uniform?
+      sizes.size == 1
+    end
+
   end # Sprite
 end # Polymer

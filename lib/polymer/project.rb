@@ -11,6 +11,7 @@ module Polymer
     # Defaults used by DSL when the user doesn't provide explicit values.
     DEFAULTS = {
       :sass    => 'public/stylesheets/sass',
+      :sass_classes => false,
       :url     => "/images/:name.png",
       :cache   => '.polymer-cache',
       :css     => false,
@@ -29,6 +30,11 @@ module Polymer
     #   False if Sass has been disabled.
     #
     attr_reader :sass
+
+    # @return [Boolean]
+    #   Include classes for each sprite in the Sass mixin
+    #
+    attr_reader :sass_classes
 
     # @return [Pathname]
     #   The path to the CSS file.
@@ -84,6 +90,8 @@ module Polymer
       @sprites   = sprites
 
       @sass      = extract_path :sass,  options
+      @sass_classes = options[:sass_classes]
+
       @css       = extract_path :css,   options
       @cachefile = extract_path :cache, options
 

@@ -28,6 +28,14 @@ module Polymer
       @image ||= ChunkyPNG::Image.from_file(@path)
     end
 
+    # Returns the Image dimensions as an Array
+    #
+    # @return [Array]
+    #
+    def size
+      [image.width, image.height]
+    end
+
     # Returns a digest which represents the sprite name and file contents.
     #
     # @return [String]

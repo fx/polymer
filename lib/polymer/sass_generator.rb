@@ -2,6 +2,7 @@ module Polymer
   class SassGenerator
 
     TEMPLATE = Pathname.new(__FILE__).dirname + 'templates/sass_mixins.erb'
+    CLASS_TEMPLATE = Pathname.new(__FILE__).dirname + 'templates/sass_classes.erb'
 
     # Given a project, generates a Sass mixin stylesheet which can can be
     # included into your own Sass stylesheets.
